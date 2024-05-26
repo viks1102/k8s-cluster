@@ -14,5 +14,6 @@ terraform {
 provider "google" {
   project     = "dtonic-demo-k8s"
   region      = "us-central1"
+  # credentials = file("/Users/viks/Documents/dtonic-demo-k8s.json")
 }
 

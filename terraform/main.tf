@@ -32,7 +32,7 @@ resource "google_container_cluster" "gke-cluster" {
   }
 
   workload_identity_config {
-    workload_pool = "dtonic-project-demo.svc.id.goog"
+    workload_pool = "dtonic-demo-k8s.svc.id.goog"
   }
 
   ip_allocation_policy {
