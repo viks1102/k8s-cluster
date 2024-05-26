@@ -14,6 +14,5 @@ terraform {
 provider "google" {
   project     = "dtonic-demo-k8s"
   region      = "us-central1"
-  credentials = "dtonic-demo-k8s.json"
 }
 
