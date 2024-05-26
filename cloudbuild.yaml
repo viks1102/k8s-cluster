@@ -32,7 +32,7 @@ steps:
       - |
         cd /workspace/terraform
            
-        If [[ "$BRANCH_NAME" == "prod" ]]; then
+        if [[ "$BRANCH_NAME" == "prod" ]]; then
           echo "Branch is prod, proceed with terraform apply."
           terraform apply --auto-approve 
           exit 0
@@ -44,14 +44,3 @@ steps:
 options:
   logging: CLOUD_LOGGING_ONLY
   dynamicSubstitutions: true
-  
-  # - name: 'hashicorp/terraform:1.0.0'
-  #   args:
-  #     - '-c'
-  #     - |
-  #       cd /workspace/terraform
-  #       terraform init
-  #       terraform plan
-  #       terraform apply --auto-approve
-  #     # terraform destroy --auto-approve
-  #   entrypoint: /bin/sh
