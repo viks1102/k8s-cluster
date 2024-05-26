@@ -1,0 +1,23 @@
+steps:
+  - name: gcr.io/cloud-builders/git
+    args:
+      - clone
+      - 'https://github.com/viks1102/k8s-cluster.git'
+    dir: /workspace
+  - name: alpine
+    args:
+      - '-c'
+      - |
+        cd /workspace/k8s-cluster
+        ls -la  
+    entrypoint: /bin/sh
+  - name: 'hashicorp/terraform:1.0.0'
+    args:
+      - '-c'
+      - |
+        cd /workspace/terraform
+        terraform init
+        terraform plan
+      # terraform apply --auto-approve
+      # terraform destroy --auto-approve
+    entrypoint: /bin/sh
