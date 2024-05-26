@@ -32,12 +32,12 @@ steps:
       - |
         cd /workspace/terraform
            
-        if [[ "$BRANCH_NAME" == "prod" ]]; then
-          echo "Branch is prod, proceed with terraform apply."
+        if [[ "$BRANCH_NAME" == "main" ]]; then
+          echo "Branch is main, proceed with terraform apply."
           terraform apply --auto-approve 
           exit 0
         else 
-          echo "Branch is not prod, skip terraform apply."
+          echo "Branch is not main, skip terraform apply."
           exit 0
         fi
 
