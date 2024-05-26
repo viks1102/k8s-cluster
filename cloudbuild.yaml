@@ -1,23 +1,53 @@
 steps:
-  - name: gcr.io/cloud-builders/git
+  - id : 'cloning repo'
+    name: gcr.io/cloud-builders/git
     args:
       - clone
       - 'https://github.com/viks1102/k8s-cluster.git'
     dir: /workspace
-  - name: alpine
-    args:
-      - '-c'
-      - |
-        cd /workspace/k8s-cluster
-        ls -la  
-    entrypoint: /bin/sh
-  - name: 'hashicorp/terraform:1.0.0'
+
+  - id : 'tf init'  
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
     args:
       - '-c'
       - |
         cd /workspace/terraform
         terraform init
+
+  - id : 'tf plan'  
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        cd /workspace/terraform
         terraform plan
-        terraform apply --auto-approve
-      # terraform destroy --auto-approve
-    entrypoint: /bin/sh
+
+  - id : 'tf apply'  
+    name: 'hashicorp/terraform:1.0.0'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        cd /workspace/terraform
+           
+        If [[ "$BRANCH_NAME" == "prod" ]]; then
+          echo "Branch is prod, proceed with terraform apply."
+          terraform apply --auto-approve 
+          exit 0
+        else 
+          echo "Branch is not prod, skip terraform apply."
+          exit 0
+        fi
+
+  # - name: 'hashicorp/terraform:1.0.0'
+  #   args:
+  #     - '-c'
+  #     - |
+  #       cd /workspace/terraform
+  #       terraform init
+  #       terraform plan
+  #       terraform apply --auto-approve
+  #     # terraform destroy --auto-approve
+  #   entrypoint: /bin/sh
