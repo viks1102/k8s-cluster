@@ -41,6 +41,10 @@ steps:
           exit 0
         fi
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+  dynamicSubstitutions: true
+  
   # - name: 'hashicorp/terraform:1.0.0'
   #   args:
   #     - '-c'
