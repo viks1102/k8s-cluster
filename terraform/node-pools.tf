@@ -4,8 +4,8 @@ resource "google_service_account" "kubernetes" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
-resource "google_container_node_pool" "general" {
-  name       = "general"
+resource "google_container_node_pool" "ops" {
+  name       = "ops"
   cluster    = google_container_cluster.gke-cluster.id
   node_count = 1
 
@@ -19,7 +19,7 @@ resource "google_container_node_pool" "general" {
     machine_type = "e2-small"
 
     labels = {
-      role = "general"
+      role = "ops"
     }
 
     service_account = google_service_account.kubernetes.email
@@ -29,8 +29,8 @@ resource "google_container_node_pool" "general" {
   }
 }
 
-resource "google_container_node_pool" "spot" {
-  name    = "spot"
+resource "google_container_node_pool" "dev" {
+  name    = "dev"
   cluster = google_container_cluster.gke-cluster.id
 
   management {
@@ -51,11 +51,11 @@ resource "google_container_node_pool" "spot" {
       team = "devops"
     }
 
-    taint {
-      key    = "instance_type"
-      value  = "spot"
-      effect = "NO_SCHEDULE"
-    }
+    # taint {
+    #   key    = "instance_type"
+    #   value  = "dev"
+    #   effect = "NO_SCHEDULE"
+    # }
 
     service_account = google_service_account.kubernetes.email
     oauth_scopes = [
