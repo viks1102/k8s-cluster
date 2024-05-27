@@ -12,7 +12,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/prod/terraform
         terraform init
 
   - id : 'tf plan'  
@@ -21,7 +21,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/prod/terraform
         terraform plan
 
   - id : 'tf apply'  
@@ -30,7 +30,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/prod/terraform
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
