@@ -13,6 +13,7 @@ steps:
       - '-c'
       - |
         cd /workspace/gke-module
+        ls -la  
         terraform init
 
   - id : 'tf plan'  
