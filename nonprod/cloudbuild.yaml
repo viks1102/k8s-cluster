@@ -12,7 +12,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/nonprod/terraform
         terraform init
 
   - id : 'tf plan'  
@@ -21,7 +21,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/nonprod/terraform
         terraform plan
 
   - id : 'tf apply'  
@@ -30,7 +30,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/terraform
+        cd /workspace/nonprod/terraform
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
@@ -43,4 +43,4 @@ steps:
 
 options:
   logging: CLOUD_LOGGING_ONLY
-  dynamicSubstitutions: true
+  # dynamicSubstitutions: true
