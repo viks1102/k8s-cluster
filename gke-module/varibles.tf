@@ -50,3 +50,16 @@ variable "ip_range_services" {
     description = "ip service range"
 }
 
+variable "cluster_autoscaling" {
+  description = "Configuration for cluster autoscaling"
+  type = object({
+    enabled             = bool
+    min_node_count      = number
+    max_node_count      = number
+  })
+  default = {
+    enabled        = true
+    min_node_count = 1
+    max_node_count = 3
+  }
+}
