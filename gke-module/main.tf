@@ -13,7 +13,7 @@ module "gke" {
   network_policy             = false
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
-  cluster_autoscaling        = var.cluster_autoscaling
+  # cluster_autoscaling        = var.cluster_autoscaling
 
   node_pools = [
     {
