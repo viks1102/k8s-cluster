@@ -1,15 +1,15 @@
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "5.30.0"
-    }
-  }
-  backend "gcs" {
-    prefix = "state/gke"
-    bucket = "k8s-bucket-tfstate-rand"
-  }
-}
+# terraform {
+#   required_providers {
+#     google = {
+#       source = "hashicorp/google"
+#       version = "5.30.0"
+#     }
+#   }
+#   backend "gcs" {
+#     prefix = "state/gke"
+#     bucket = "k8s-bucket-tfstate-rand"
+#   }
+# }
 
 provider "google" {
   project     = var.gcp_project_id
