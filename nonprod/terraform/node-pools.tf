@@ -1,17 +1,46 @@
-# https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account
-resource "google_service_account" "kubernetes" {
-  account_id = "kubernetes-demo"
-}
+# # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account
+# resource "google_service_account" "kubernetes" {
+#   account_id = "kubernetes-demo"
+# }
 
-# # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
+# # # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
+# # resource "google_container_node_pool" "ops" {
+# #   name       = "ops"
+# #   cluster    = google_container_cluster.gke-cluster-nonprod.id
+# #   node_count = 1
+
+# #   management {
+# #     auto_repair  = true
+# #     auto_upgrade = true
+# #   }
+
+# #   node_config {
+# #     preemptible  = false
+# #     machine_type = "e2-small"
+
+# #     labels = {
+# #       role = "ops"
+# #     }
+
+# #     service_account = google_service_account.kubernetes.email
+# #     oauth_scopes = [
+# #       "https://www.googleapis.com/auth/cloud-platform"
+# #     ]
+# #   }
+# # }
+
 # resource "google_container_node_pool" "ops" {
-#   name       = "ops"
-#   cluster    = google_container_cluster.gke-cluster-nonprod.id
-#   node_count = 1
+#   name    = "ops"
+#   cluster = google_container_cluster.gke-cluster-nonprod.id
 
 #   management {
 #     auto_repair  = true
 #     auto_upgrade = true
+#   }
+
+#   autoscaling {
+#     min_node_count = 1
+#     max_node_count = 3
 #   }
 
 #   node_config {
@@ -19,8 +48,14 @@ resource "google_service_account" "kubernetes" {
 #     machine_type = "e2-small"
 
 #     labels = {
-#       role = "ops"
+#       team = "ops"
 #     }
+
+#     # taint {
+#     #   key    = "instance_type"
+#     #   value  = "dev"
+#     #   effect = "NO_SCHEDULE"
+#     # }
 
 #     service_account = google_service_account.kubernetes.email
 #     oauth_scopes = [
@@ -29,72 +64,37 @@ resource "google_service_account" "kubernetes" {
 #   }
 # }
 
-resource "google_container_node_pool" "ops" {
-  name    = "ops"
-  cluster = google_container_cluster.gke-cluster-nonprod.id
+# resource "google_container_node_pool" "dev" {
+#   name    = "dev"
+#   cluster = google_container_cluster.gke-cluster-nonprod.id
 
-  management {
-    auto_repair  = true
-    auto_upgrade = true
-  }
+#   management {
+#     auto_repair  = true
+#     auto_upgrade = true
+#   }
 
-  autoscaling {
-    min_node_count = 1
-    max_node_count = 3
-  }
+#   autoscaling {
+#     min_node_count = 0
+#     max_node_count = 3
+#   }
 
-  node_config {
-    preemptible  = false
-    machine_type = "e2-small"
+#   node_config {
+#     preemptible  = false
+#     machine_type = "e2-small"
 
-    labels = {
-      team = "ops"
-    }
+#     labels = {
+#       team = "devops"
+#     }
 
-    # taint {
-    #   key    = "instance_type"
-    #   value  = "dev"
-    #   effect = "NO_SCHEDULE"
-    # }
+#     # taint {
+#     #   key    = "instance_type"
+#     #   value  = "dev"
+#     #   effect = "NO_SCHEDULE"
+#     # }
 
-    service_account = google_service_account.kubernetes.email
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
-  }
-}
-
-resource "google_container_node_pool" "dev" {
-  name    = "dev"
-  cluster = google_container_cluster.gke-cluster-nonprod.id
-
-  management {
-    auto_repair  = true
-    auto_upgrade = true
-  }
-
-  autoscaling {
-    min_node_count = 0
-    max_node_count = 3
-  }
-
-  node_config {
-    preemptible  = false
-    machine_type = "e2-small"
-
-    labels = {
-      team = "devops"
-    }
-
-    # taint {
-    #   key    = "instance_type"
-    #   value  = "dev"
-    #   effect = "NO_SCHEDULE"
-    # }
-
-    service_account = google_service_account.kubernetes.email
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/cloud-platform"
-    ]
-  }
-}
+#     service_account = google_service_account.kubernetes.email
+#     oauth_scopes = [
+#       "https://www.googleapis.com/auth/cloud-platform"
+#     ]
+#   }
+# }
