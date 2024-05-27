@@ -1,6 +1,6 @@
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 resource "google_container_cluster" "gke-cluster-nonprod" {
-  name                     = "gke-cluster"
+  name                     = "gke-cluster-nonprod"
   location                 = "us-central1-a"
   remove_default_node_pool = true
   initial_node_count       = 1
@@ -12,7 +12,6 @@ resource "google_container_cluster" "gke-cluster-nonprod" {
 
   # Disable deletion protection
   deletion_protection = false
-
   # Optional, if you want multi-zonal cluster
   node_locations = [
     "us-central1-b"

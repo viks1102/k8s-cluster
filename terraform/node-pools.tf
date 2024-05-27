@@ -6,7 +6,7 @@ resource "google_service_account" "kubernetes" {
 # # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_node_pool
 # resource "google_container_node_pool" "ops" {
 #   name       = "ops"
-#   cluster    = google_container_cluster.gke-cluster.id
+#   cluster    = google_container_cluster.gke-cluster-nonprod.id
 #   node_count = 1
 
 #   management {
@@ -31,7 +31,7 @@ resource "google_service_account" "kubernetes" {
 
 resource "google_container_node_pool" "ops" {
   name    = "ops"
-  cluster = google_container_cluster.gke-cluster.id
+  cluster = google_container_cluster.gke-cluster-nonprod.id
 
   management {
     auto_repair  = true
@@ -66,7 +66,7 @@ resource "google_container_node_pool" "ops" {
 
 resource "google_container_node_pool" "dev" {
   name    = "dev"
-  cluster = google_container_cluster.gke-cluster.id
+  cluster = google_container_cluster.gke-cluster-nonprod.id
 
   management {
     auto_repair  = true
