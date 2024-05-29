@@ -15,7 +15,7 @@ module "gke" {
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
   deletion_protection        = false
-  
+
   node_pools = [
     {
       name                      = var.gke_node_pool
@@ -34,8 +34,8 @@ module "gke" {
       auto_upgrade              = false
       service_account           = var.gke_service_account
       preemptible               = true
-      initial_node_count        = 1
-      deletion_protection        = false
+      initial_node_count        = 2
+      deletion_protection       = false
       
     },
   ]
