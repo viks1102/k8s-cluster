@@ -12,7 +12,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/gke-module
+        cd /workspace/k8s-cluster/gke-module
         ls -la  
         terraform init
 
@@ -22,7 +22,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/gke-module
+        cd /workspace/k8s-cluster/gke-module
         terraform plan
 
   - id : 'tf apply'  
@@ -31,7 +31,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/gke-module
+        cd /workspace/k8s-cluster/gke-module
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
