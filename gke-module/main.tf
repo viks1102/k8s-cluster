@@ -7,13 +7,13 @@ module "gke" {
   zones                      = var.zones
   network                    = var.vpc_network
   subnetwork                 = var.vpc_subnet
-  ip_range_pods              = "us-central1-01-gke-01-pods"
-  ip_range_services          = "us-central1-01-gke-01-services"
+  ip_range_pods              = ""
+  ip_range_services          = ""
   http_load_balancing        = false
   network_policy             = false
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
-  cluster_autoscaling        = false
+  deletion_protection        = false
 
   node_pools = [
     {
@@ -23,7 +23,7 @@ module "gke" {
       max_count                 = 3
       local_ssd_count           = 0
       spot                      = false
-      disk_size_gb              = 100
+      disk_size_gb              = 50
       disk_type                 = "pd-standard"
       image_type                = "COS_CONTAINERD"
       enable_gcfs               = false
@@ -33,7 +33,9 @@ module "gke" {
       auto_upgrade              = true
       service_account           = var.gke_service_account
       preemptible               = true
-      initial_node_count        = 2
+      initial_node_count        = 1
+      deletion_protection        = false
+      
     },
   ]
 
@@ -44,39 +46,39 @@ module "gke" {
     ]
   }
 
-  node_pools_labels = {
-    all = {}
+  # node_pools_labels = {
+  #   all = {}
 
-    default-node-pool = {
-      default-node-pool = true
-    }
-  }
+  #   default-node-pool = {
+  #     default-node-pool = true
+  #   }
+  # }
 
-  node_pools_metadata = {
-    all = {}
+  # node_pools_metadata = {
+  #   all = {}
 
-    default-node-pool = {
-      node-pool-metadata-custom-value = "my-node-pool"
-    }
-  }
+  #   default-node-pool = {
+  #     node-pool-metadata-custom-value = "my-node-pool"
+  #   }
+  # }
 
-  node_pools_taints = {
-    all = []
+  # node_pools_taints = {
+  #   all = []
 
-    default-node-pool = [
-      {
-        key    = "default-node-pool"
-        value  = true
-        effect = "PREFER_NO_SCHEDULE"
-      },
-    ]
-  }
+  #   default-node-pool = [
+  #     {
+  #       key    = "default-node-pool"
+  #       value  = true
+  #       effect = "PREFER_NO_SCHEDULE"
+  #     },
+  #   ]
+  # }
 
-  node_pools_tags = {
-    all = []
+  # node_pools_tags = {
+  #   all = []
 
-    default-node-pool = [
-      "default-node-pool",
-    ]
-  }
+  #   default-node-pool = [
+  #     "default-node-pool",
+  #   ]
+  # }
 }

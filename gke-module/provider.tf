@@ -11,6 +11,9 @@
 #   }
 # }
 
+# google_client_config and kubernetes provider must be explicitly specified like the following.
+data "google_client_config" "default" {}
+
 provider "google" {
   project     = var.gcp_project_id
   region      = var.region
