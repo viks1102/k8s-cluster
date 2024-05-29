@@ -30,7 +30,7 @@ steps:
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
           terraform apply -input=false tfplan
-      # terraform apply --auto-approve 
+#terraform apply --auto-approve 
           exit 0
         else 
           echo "Branch is not main, skip terraform apply."
