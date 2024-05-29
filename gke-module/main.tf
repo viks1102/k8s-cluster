@@ -15,8 +15,7 @@ module "gke" {
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
   deletion_protection        = false
-   # Disable node auto-provisioning
-  enable_node_autoprovisioning = false
+  
   node_pools = [
     {
       name                      = var.gke_node_pool
