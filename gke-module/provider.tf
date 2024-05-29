@@ -5,10 +5,10 @@
 #       version = "5.30.0"
 #     }
 #   }
-#   # backend "gcs" {
-#   #   prefix = "state/gke"
-#   #   bucket = "k8s-bucket-tfstate-rand"
-#   # }
+#   backend "gcs" {
+#     prefix = "state/gke"
+#     bucket = "k8s-bucket-tfstate-rand"
+#   }
 # }
 
 # google_client_config and kubernetes provider must be explicitly specified like the following.
