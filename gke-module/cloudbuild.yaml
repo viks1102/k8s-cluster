@@ -1,33 +1,27 @@
 steps:
-  - id : 'cloning repo'
-    name: gcr.io/cloud-builders/git
+  - name: gcr.io/cloud-builders/git
     args:
       - clone
       - 'https://github.com/viks1102/k8s-cluster.git'
     dir: /workspace
-
-  - id : 'tf init'  
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: sh
+    id: Clone Repository
+  - name: 'hashicorp/terraform:light'
     args:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
-        ls -la  
-        terraform init
-
-  - id : 'tf plan'  
-    name: 'hashicorp/terraform:1.0.0'
+        terraform init -reconfigure
+    id: Terraform Init
     entrypoint: sh
+  - name: 'hashicorp/terraform:light'
     args:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
-        terraform plan
-
-  - id : 'tf apply'  
-    name: 'hashicorp/terraform:1.0.0'
+        terraform plan -out=tfplan
+    id: Terraform Plan
     entrypoint: sh
+  - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
@@ -41,7 +35,8 @@ steps:
           echo "Branch is not main, skip terraform apply."
           exit 0
         fi
-
+    id: tf apply
+    entrypoint: sh
+    
 options:
   logging: CLOUD_LOGGING_ONLY
-  dynamicSubstitutions: true
