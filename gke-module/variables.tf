@@ -13,11 +13,11 @@ variable "cluster_name1" {
 
 }
 
-variable "cluster_name2" {
-    type = string
-    description = "second cluster name"
+# variable "cluster_name2" {
+#     type = string
+#     description = "second cluster name"
 
-}
+# }
 
 variable "zones" {
     type = list(string)
