@@ -18,17 +18,14 @@ steps:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
-        terraform plan -out=tfplan
+        terraform plan
     id: Terraform Plan
     entrypoint: sh
-    
-  - id : 'tf apply'  
-    name: 'hashicorp/terraform:1.0.0'
-    entrypoint: sh
+  - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
-        cd /workspace/gke-module
+        cd /workspace/k8s-cluster/gke-module
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
@@ -38,6 +35,7 @@ steps:
           echo "Branch is not main, skip terraform apply."
           exit 0
         fi
-
+    id: tf apply
+    entrypoint: sh
 options:
   logging: CLOUD_LOGGING_ONLY
