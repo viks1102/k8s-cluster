@@ -30,8 +30,8 @@ module "gke" {
       enable_gcfs               = false
       enable_gvnic              = false
       logging_variant           = "DEFAULT"
-      auto_repair               = false
-      auto_upgrade              = false
+      auto_repair               = true
+      auto_upgrade              = true
       service_account           = var.gke_service_account
       preemptible               = true
       initial_node_count        = 2
