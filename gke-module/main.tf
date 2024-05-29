@@ -15,7 +15,8 @@ module "gke" {
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = false
   deletion_protection        = false
-
+   # Disable node auto-provisioning
+  enable_node_autoprovisioning = false
   node_pools = [
     {
       name                      = var.gke_node_pool
@@ -30,8 +31,8 @@ module "gke" {
       enable_gcfs               = false
       enable_gvnic              = false
       logging_variant           = "DEFAULT"
-      auto_repair               = true
-      auto_upgrade              = true
+      auto_repair               = false
+      auto_upgrade              = false
       service_account           = var.gke_service_account
       preemptible               = true
       initial_node_count        = 1
