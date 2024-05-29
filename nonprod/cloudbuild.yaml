@@ -5,42 +5,41 @@ steps:
       - clone
       - 'https://github.com/viks1102/k8s-cluster.git'
     dir: /workspace
+    id: Clone Repository
 
-  - id : 'tf init'  
+  - id : 'tf init'   
     name: 'hashicorp/terraform:1.0.0'
-    entrypoint: sh
     args:
       - '-c'
       - |
-        cd /workspace/nonprod/terraform
+        cd /workspace/k8s-cluster/nonprod/terraform
         terraform init
-
-  - id : 'tf plan'  
-    name: 'hashicorp/terraform:1.0.0'
+    id: Terraform Init
     entrypoint: sh
+
+  - id : 'tf plan'   
+    name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
-        cd /workspace/nonprod/terraform
-        terraform plan
-
-  - id : 'tf apply'  
-    name: 'hashicorp/terraform:1.0.0'
+        cd /workspace/k8s-cluster/nonprod/terraform
+        terraform plan -out=tfplan
+    id: Terraform Plan
     entrypoint: sh
+
+  - id : 'tf apply'    
+    name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
-        cd /workspace/nonprod/terraform
-           
-        if [[ "$BRANCH_NAME" == "main" ]]; then
-          echo "Branch is main, proceed with terraform apply."
-          terraform apply --auto-approve 
-          exit 0
-        else 
-          echo "Branch is not main, skip terraform apply."
-          exit 0
+        cd /workspace/k8s-cluster/nonprod/terraform
+        if [ "$BRANCH_NAME" == "main" ]; then
+          echo "Branch is main, applying Terraform plan."
+          terraform apply -input=false tfplan
+        else
+          echo "Branch is not main, skipping Terraform apply."
         fi
-
+    id: Terraform Apply
+    entrypoint: sh
 options:
   logging: CLOUD_LOGGING_ONLY
-  # dynamicSubstitutions: true
