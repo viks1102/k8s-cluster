@@ -6,8 +6,8 @@ zones               = ["us-central1-a", "us-central1-b", "us-central1-f"]
 regional            = false
 vpc_network         = "k8s-vpc"
 vpc_subnet          = "private"
-gke_node_pool1      = "non-prod"
-gke_node_pool2      = "prod"
-gke_service_account = "terraform-k8s-sa@dtonic-demo-k8s.iam.gserviceaccount.com"
+# gke_node_pool1      = "non-prod"
+# gke_node_pool2      = "prod"
+# gke_service_account = "terraform-k8s-sa@dtonic-demo-k8s.iam.gserviceaccount.com"
 
 

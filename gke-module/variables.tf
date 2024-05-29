@@ -38,19 +38,19 @@ variable "vpc_subnet" {
     type = string
     description = "VPC Subnet"
 }
-variable "gke_node_pool1" {
-    type = string
-    description = "gke-node-pool name"
-}
+# variable "gke_node_pool1" {
+#     type = string
+#     description = "gke-node-pool name"
+# }
 
-variable "gke_node_pool2" {
-    type = string
-    description = "gke-node-pool name"
-}
-variable "gke_service_account" {
-    type = string
-    description = "gke service account name"
-}
+# variable "gke_node_pool2" {
+#     type = string
+#     description = "gke-node-pool name"
+# }
+# variable "gke_service_account" {
+#     type = string
+#     description = "gke service account name"
+# }
 
 # variable "ip_range_pods" {
 #     type = string

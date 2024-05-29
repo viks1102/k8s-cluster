@@ -1,4 +1,4 @@
-module "non-prod" {
+module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
   # source                     = "github.com/terraform-google-modules/terraform-google-kubernetes-engine?ref=v30.3.0"
   project_id                 = var.gcp_project_id
@@ -18,7 +18,7 @@ module "non-prod" {
 
   node_pools = [
     {
-      name                      = var.gke_node_pool
+      name                      = "non-prod"
       machine_type              = "e2-medium"
       min_count                 = 1
       max_count                 = 3
@@ -32,7 +32,7 @@ module "non-prod" {
       logging_variant           = "DEFAULT"
       auto_repair               = true
       auto_upgrade              = true
-      service_account           = var.gke_service_account
+      service_account           = "terraform-k8s-sa@dtonic-demo-k8s.iam.gserviceaccount.com"
       preemptible               = true
       initial_node_count        = 2
       deletion_protection       = false
@@ -48,7 +48,7 @@ module "non-prod" {
   }
 }
 
-module "prod" {
+module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
   project_id                 = var.gcp_project_id
   name                       = var.cluster_name2
@@ -81,7 +81,7 @@ module "prod" {
       logging_variant           = "DEFAULT"
       auto_repair               = false
       auto_upgrade              = false
-      service_account           = var.gke_service_account
+      service_account           = "terraform-k8s-sa@dtonic-demo-k8s.iam.gserviceaccount.com"
       preemptible               = true
       initial_node_count        = 1
       deletion_protection       = false
