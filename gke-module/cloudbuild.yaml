@@ -10,7 +10,7 @@ steps:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
-        terraform init -reconfigure --auto-approve 
+        terraform init -ignore-remote-version
     id: Terraform Init
     entrypoint: sh
   - name: 'hashicorp/terraform:light'
