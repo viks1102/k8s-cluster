@@ -25,12 +25,6 @@ resource "google_container_node_pool" "prod" {
       team = "prod"
     }
 
-    # taint {
-    #   key    = "instance_type"
-    #   value  = "dev"
-    #   effect = "NO_SCHEDULE"
-    # }
-
     service_account = google_service_account.kubernetes.email
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
