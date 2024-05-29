@@ -29,7 +29,8 @@ steps:
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
-          terraform apply --auto-approve 
+          terraform apply -input=false tfplan
+      # terraform apply --auto-approve 
           exit 0
         else 
           echo "Branch is not main, skip terraform apply."
@@ -37,6 +38,6 @@ steps:
         fi
     id: tf apply
     entrypoint: sh
-    
+
 options:
   logging: CLOUD_LOGGING_ONLY
