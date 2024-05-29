@@ -1,6 +1,6 @@
 module "gke" {
-  # source                     = "terraform-google-modules/kubernetes-engine/google"
-  source                     = "github.com/terraform-google-modules/terraform-google-kubernetes-engine?ref=v30.3.0"
+  source                     = "terraform-google-modules/kubernetes-engine/google"
+  # source                     = "github.com/terraform-google-modules/terraform-google-kubernetes-engine?ref=v30.3.0"
   project_id                 = var.gcp_project_id
   name                       = var.cluster_name
   region                     = var.region
