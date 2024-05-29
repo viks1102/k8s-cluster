@@ -48,7 +48,7 @@ module "gke" {
   }
 }
 
-module "gke" {
+module "gke1" {
   source                     = "terraform-google-modules/kubernetes-engine/google"
   project_id                 = var.gcp_project_id
   name                       = var.cluster_name2
