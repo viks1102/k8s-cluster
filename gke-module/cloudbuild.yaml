@@ -26,6 +26,7 @@ steps:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
+        ls -lrth
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
           echo "Branch is main, proceed with terraform apply."
