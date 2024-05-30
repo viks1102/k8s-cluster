@@ -1,9 +1,9 @@
 steps:
-   - name: gcr.io/cloud-builders/git
-     args:
+  - name: gcr.io/cloud-builders/git
+    args:
       - clone
       - 'https://github.com/viks1102/k8s-cluster.git'
-     dir: /workspace
+    dir: /workspace
 
   - name: 'gcr.io/cloud-builders/git'
     args: 
