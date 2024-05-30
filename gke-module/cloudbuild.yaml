@@ -5,19 +5,19 @@ steps:
       - 'https://github.com/viks1102/k8s-cluster.git'
     dir: /workspace
     id: Clone Repository
-  - name: 'hashicorp/terraform:light'
+  - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
-        cd /workspace/k8s-cluster/gke-module
+        cd /workspace/gke-module
         terraform init -ignore-remote-version
     id: Terraform Init
     entrypoint: sh
-  - name: 'hashicorp/terraform:light'
+  - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
       - |
-        cd /workspace/k8s-cluster/gke-module
+        cd /workspace/gke-module
         ls -lrth
         terraform plan -out=tfplan
         ls -lrth
@@ -27,7 +27,7 @@ steps:
     args:
       - '-c'
       - |
-        cd /workspace/k8s-cluster/gke-module
+        cd /workspace/gke-module
         ls -lrth
            
         if [[ "$BRANCH_NAME" == "main" ]]; then
