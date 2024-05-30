@@ -18,7 +18,9 @@ steps:
       - '-c'
       - |
         cd /workspace/k8s-cluster/gke-module
+        ls -lrth
         terraform plan -out=tfplan
+        ls -lrth
     id: Terraform Plan
     entrypoint: sh
   - name: 'hashicorp/terraform:1.0.0'
