@@ -21,7 +21,7 @@ steps:
       - |
         cd /workspace/k8s-cluster/gke-module
         ls -lrth
-        terraform init -ignore-remote-version
+        terraform init -reconfigure
         ls -lrth
     id: Terraform Init
     entrypoint: sh
