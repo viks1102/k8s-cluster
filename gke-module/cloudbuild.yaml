@@ -2,9 +2,19 @@ steps:
    - name: gcr.io/cloud-builders/git
     args:
       - clone
-      - 'https://github.com/viks1102/gcs-bucket.git'
+      - 'https://github.com/viks1102/k8s-cluster.git'
     dir: /workspace
-    
+
+  - name: 'gcr.io/cloud-builders/git'
+    args:
+      - '-c'
+      - |
+        echo "Listing contents of /workspace after cloning:"
+        ls -lrth /workspace
+        echo "Listing contents of /workspace/k8s-cluster:"
+        ls -lrth /workspace/k8s-cluster
+    entrypoint: sh  
+
   - name: 'hashicorp/terraform:1.0.0'
     args:
       - '-c'
